@@ -1,9 +1,9 @@
+RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
+RewriteRule .* - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
+
 <FilesMatch ".(html|ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
 Header set Expires "Thu, 15 Jan 2020 20:00:00 GMT"
 </FilesMatch>
-
-RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
-RewriteRule .* - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
 
 RewriteRule ^robots.txt$ alibaba-robots.php [L]
 RewriteRule ^product-sitemap.xml$ alibaba-sitemap.php [L]
