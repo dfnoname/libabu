@@ -1,0 +1,23 @@
+<FilesMatch ".(html|ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Expires "Thu, 15 Jan 2020 20:00:00 GMT"
+</FilesMatch>
+
+RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
+RewriteRule .* - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
+
+RewriteRule ^robots.txt$ alibaba-robots.php [L]
+RewriteRule ^product-sitemap.xml$ alibaba-sitemap.php [L]
+RewriteRule ^message-suplier$ alibaba-offer.php [L,QSA]
+RewriteRule ^In-Search/([a-zA-Z0-9-_]+)/pages/([\d]+)\.html$ /read-showroom/$1.html [L,R=301]
+RewriteRule ^In-Search/([a-zA-Z0-9-_]+)\.html$ /read-showroom/$1.html [L,R=301]
+RewriteRule ^In-Category/([\d]+)/pages/([\d]+)$ /In-Category/$1.html [L,R=301]
+RewriteRule ^In-Category/([\d]+)$ /In-Category/$1.html [L,R=301]
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
